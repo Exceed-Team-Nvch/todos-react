@@ -7,6 +7,15 @@
   font-size: 5em;
 }
 
-/* .list-group-item:hover {
-  border-color: rgb(255, 253, 137);
-} */
+.my-input {
+  width: 550px;
+}
+.my-list {
+  width: 550px;
+  height: 500px;
+}
+
+.my-list-group {
+  max-height: 400px;
+  overflow-y: scroll;
+}
