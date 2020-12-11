@@ -1,7 +1,8 @@
 import React from 'react'
 import './App.css'
+import { store, removeCompleted } from './store/store'
 
-const ToolBar = ({ setFilter, list, removeCompleted }) => {
+const ToolBar = ({ setFilter, list }) => {
   const count = list.filter((todo) => !todo.done).length
 
   return (
@@ -9,7 +10,7 @@ const ToolBar = ({ setFilter, list, removeCompleted }) => {
       <div> {count} items left</div>
 
       <FilterBar setFilter={setFilter} />
-      <RemoveList removeCompleted={removeCompleted} />
+      <RemoveList />
     </div>
   )
 }
@@ -37,11 +38,14 @@ const FilterBar = ({ setFilter }) => (
   </div>
 )
 
-const RemoveList = ({ removeCompleted }) => {
+const RemoveList = () => {
   return (
     <button
       className="my-btn btn btn-outline-secondary m-1"
-      onClick={removeCompleted}
+      onClick={
+        // removeCompleted
+        () => store.dispatch(removeCompleted())
+      }
     >
       Clear completed
     </button>

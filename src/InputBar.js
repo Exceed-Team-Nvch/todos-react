@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './App.css'
+import { store, addItem } from './store/store'
+import { dispatch } from 'react'
 
-const InputBar = ({ addListItem, toCompleted }) => {
+const InputBar = ({ toCompleted }) => {
   const [value, setValue] = useState('')
 
   const getInput = (event) => {
@@ -14,14 +16,18 @@ const InputBar = ({ addListItem, toCompleted }) => {
   }
   const eventEnter = (event) => {
     if (event.key === 'Enter') {
-      // if (!event.target.value.trim()) {
-      //   event.target.className = 'alert-form-control form-control'
-      // } else {
-      //   event.target.className = 'form-control'
       if (getInput(event)) {
         setValue(event.target.value)
         console.log(event)
-        addListItem(value, Date.now(), event)
+        const id = Date.now()
+        console.log(id)
+        store.dispatch(
+          addItem({
+            id,
+            value,
+            done: false,
+          })
+        )
         setValue('')
       }
     }

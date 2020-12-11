@@ -1,25 +1,14 @@
 import React from 'react'
 import './App.css'
 import ToolBar from './ToolBar.js'
+import { store, removeItem } from './store/store'
 
-const List = ({
-  list,
-  removeListItem,
-  tick,
-  setFilter,
-  categoryList,
-  removeCompleted,
-}) => {
+const List = ({ list, tick, setFilter, categoryList }) => {
   return (
     <div>
       <ul className="my-list-group list-group " scroll="yes">
         {categoryList.map((item) => (
-          <ListItem
-            item={item}
-            key={item.id}
-            removeListItem={removeListItem}
-            tick={tick}
-          />
+          <ListItem item={item} key={item.id} tick={tick} />
         ))}
       </ul>
       {list && (
@@ -27,7 +16,6 @@ const List = ({
           setFilter={setFilter}
           categoryList={categoryList}
           list={list}
-          removeCompleted={removeCompleted}
         />
       )}
     </div>
@@ -44,7 +32,7 @@ const ListItem = ({ item, removeListItem, tick }) => (
     />
     <div> {item.value}</div>
     <button
-      onClick={() => removeListItem(item.id)}
+      onClick={() => store.dispatch(removeItem(item.id))}
       className="btn btn-outline-secondary"
       type="button"
       id="button-addon2"
