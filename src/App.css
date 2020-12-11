@@ -19,3 +19,18 @@
   max-height: 400px;
   overflow-y: scroll;
 }
+
+.alert-form-control:focus {
+  border: solid;
+  border-width: 1px;
+  border-color: rgb(194, 98, 98);
+}
+
+.custom-btn {
+  height: 42px;
+  width: 40px;
+  border: solid;
+  border-color: #ced4da;
+  border-width: 1px;
+  background-color: white;
+}

@@ -51,14 +51,10 @@ const Todos = () => {
     localStorage.setItem('filter', filter)
   }, [list, filter])
 
-  const addListItem = (value, id, done = false) => {
-    if (value.trim()) {
-      let copyList = [...list]
-      copyList.push({ value, id, done })
-      setList(copyList)
-    } else {
-      alert('Введите корректные данные')
-    }
+  const addListItem = (value, id, e, done = false) => {
+    let copyList = [...list]
+    copyList.push({ value, id, done })
+    setList(copyList)
   }
 
   const tick = (id, done) => {

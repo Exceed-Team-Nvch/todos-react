@@ -4,11 +4,26 @@ import './App.css'
 const InputBar = ({ addListItem, toCompleted }) => {
   const [value, setValue] = useState('')
 
-  const ifEnter = (event) => {
+  const getInput = (event) => {
+    if (!event.target.value.trim()) {
+      event.target.className = 'alert-form-control form-control'
+    } else {
+      event.target.className = 'form-control'
+      return true
+    }
+  }
+  const eventEnter = (event) => {
     if (event.key === 'Enter') {
-      setValue(event.target.value)
-      addListItem(value, Date.now())
-      setValue('')
+      // if (!event.target.value.trim()) {
+      //   event.target.className = 'alert-form-control form-control'
+      // } else {
+      //   event.target.className = 'form-control'
+      if (getInput(event)) {
+        setValue(event.target.value)
+        console.log(event)
+        addListItem(value, Date.now(), event)
+        setValue('')
+      }
     }
   }
 
@@ -19,16 +34,18 @@ const InputBar = ({ addListItem, toCompleted }) => {
           toCompleted()
           setValue('')
         }}
-        className="btn btn-outline-secondary"
-        type="button"
+        className="custom-btn"
+        type="button "
         id="button-addon2"
       >
-        V
+        &#9745;
       </button>
       <input
-        className="input"
-        onChange={(e) => setValue(e.target.value)}
-        onKeyPress={(e) => ifEnter(e)}
+        onChange={(e) => {
+          setValue(e.target.value)
+          getInput(e)
+        }}
+        onKeyPress={(e) => eventEnter(e)}
         type="text"
         className="form-control"
         placeholder="What needs to be done?"
