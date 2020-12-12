@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import './App.css'
-import { store, addItem } from './store/store'
-import { dispatch } from 'react'
+import '../../App.css'
+import { store } from '../../store'
+import { addItem } from '../../actions'
 
 const InputBar = ({ toCompleted }) => {
   const [value, setValue] = useState('')
@@ -18,9 +18,7 @@ const InputBar = ({ toCompleted }) => {
     if (event.key === 'Enter') {
       if (getInput(event)) {
         setValue(event.target.value)
-        console.log(event)
         const id = Date.now()
-        console.log(id)
         store.dispatch(
           addItem({
             id,
@@ -34,16 +32,15 @@ const InputBar = ({ toCompleted }) => {
   }
 
   return (
-    <div className="input-group mb-1 col-lg-5 justify-content-between ">
+    <div className='input-group mb-1 col-lg-5 justify-content-between '>
       <button
         onClick={() => {
           toCompleted()
           setValue('')
         }}
-        className="custom-btn"
-        type="button "
-        id="button-addon2"
-      >
+        className='custom-btn'
+        type='button '
+        id='button-addon2'>
         &#9745;
       </button>
       <input
@@ -52,10 +49,10 @@ const InputBar = ({ toCompleted }) => {
           getInput(e)
         }}
         onKeyPress={(e) => eventEnter(e)}
-        type="text"
-        className="form-control"
-        placeholder="What needs to be done?"
-        aria-describedby="button-addon2"
+        type='text'
+        className='form-control'
+        placeholder='What needs to be done?'
+        aria-describedby='button-addon2'
         value={value}
       />
     </div>

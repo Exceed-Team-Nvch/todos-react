@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import './App.css'
-import InputBar from './InputBar.js'
-import List from './List.js'
-import { store } from './store/store'
+import '../../App.css'
+import InputBar from '../InputBar/index'
+import List from '../List/index'
+import { store } from '../../store'
 
 const Todos = () => {
   const [list, setList] = useState([])
   const [filter, setFilter] = useState('All')
+
+  store.subscribe(() => {
+    setList(store.getState().list)
+  })
   const toCompleted = () => {
     setList(
       list.map((todo) => {
@@ -16,12 +20,7 @@ const Todos = () => {
     )
   }
 
-  store.subscribe(() => {
-    setList(store.getState().list)
-  })
-
   const getListCategory = () => {
-    console.log(store.getState())
     if (filter === 'Active') {
       return list.filter((todo) => !todo.done)
     }
@@ -29,10 +28,6 @@ const Todos = () => {
       return list.filter((todo) => todo.done)
     }
     return list
-  }
-
-  const removeListItem = (id) => {
-    setList(list.filter((item) => item.id !== id))
   }
 
   useEffect(() => {
@@ -65,14 +60,14 @@ const Todos = () => {
   }
 
   return (
-    <div className="container p-5 d-flex flex-column align-items-center">
-      <div className="todo-header text-center  m-5 ">Todos</div>
+    <div className='container p-5 d-flex flex-column align-items-center'>
+      <div className='todo-header text-center  m-5 '>Todos</div>
 
-      <div className="my-input">
+      <div className='my-input'>
         <InputBar toCompleted={toCompleted} />
       </div>
 
-      <div className="my-list">
+      <div className='my-list'>
         <List
           list={list}
           categoryList={getListCategory(list)}
