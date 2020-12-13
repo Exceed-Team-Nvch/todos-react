@@ -13,4 +13,4 @@ const RemoveList = () => {
   )
 }
 
-export { RemoveList }
+export default RemoveList

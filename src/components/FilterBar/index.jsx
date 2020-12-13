@@ -22,4 +22,4 @@ const FilterBar = ({ setFilter }) => (
   </div>
 )
 
-export { FilterBar }
+export default FilterBar
